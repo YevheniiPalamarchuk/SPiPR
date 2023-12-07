@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+message User {
+  string id = 1;
+  string username = 2;
+  string password = 3; 
+}
+
+message Message {
+  string content = 1;
+}
+
+message GetMessagesRequest {
+  int32 n = 1;
+}
+
+message GetMessagesWithHashtagRequest {
+  string hashtag = 1;
+}
+
+service MiniTwitter {
+  rpc sendMessage(Message) returns (Message);
+  rpc getMessages(GetMessagesRequest) returns (stream Message);
+  rpc getMessagesWithHashtag(GetMessagesWithHashtagRequest) returns (stream Message);
+}
