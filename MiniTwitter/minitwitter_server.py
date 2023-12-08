@@ -24,6 +24,7 @@ class MiniTwitterServicer(minitwitter_pb2_grpc.MiniTwitterServicer):
             yield message
 
 
+
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     mini_twitter_servicer = MiniTwitterServicer()
@@ -39,4 +40,3 @@ def serve():
 
 if __name__ == '__main__':
     serve()
-

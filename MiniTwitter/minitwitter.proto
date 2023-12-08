@@ -1,11 +1,5 @@
 syntax = "proto3";
 
-message User {
-  string id = 1;
-  string username = 2;
-  string password = 3; 
-}
-
 message Message {
   string content = 1;
 }

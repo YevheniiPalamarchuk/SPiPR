@@ -15,7 +15,7 @@ def run():
         print("Response from server:", send_response.content)
 
         # Modify the message content
-        modified_message = minitwitter_pb2.Message(content="#cats Hello this is my custom message from Yevhenii123!")
+        modified_message = minitwitter_pb2.Message(content="#cats BIGGEST Hello this is my custom message from Yevhenii123!")
 
         # Send the modified message to the server
         modified_response = stub.sendMessage(modified_message)
