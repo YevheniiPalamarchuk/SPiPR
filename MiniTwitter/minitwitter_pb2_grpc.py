@@ -29,6 +29,11 @@ class MiniTwitterStub(object):
                 request_serializer=minitwitter__pb2.BulkMessageRequest.SerializeToString,
                 response_deserializer=minitwitter__pb2.Message.FromString,
                 )
+        self.getMessagesWithHashtag = channel.unary_stream(
+                '/MiniTwitter/getMessagesWithHashtag',
+                request_serializer=minitwitter__pb2.GetMessagesWithHashtagRequest.SerializeToString,
+                response_deserializer=minitwitter__pb2.Message.FromString,
+                )
 
 
 class MiniTwitterServicer(object):
@@ -52,6 +57,12 @@ class MiniTwitterServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def getMessagesWithHashtag(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_MiniTwitterServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -68,6 +79,11 @@ def add_MiniTwitterServicer_to_server(servicer, server):
             'sendBulkMessages': grpc.unary_stream_rpc_method_handler(
                     servicer.sendBulkMessages,
                     request_deserializer=minitwitter__pb2.BulkMessageRequest.FromString,
+                    response_serializer=minitwitter__pb2.Message.SerializeToString,
+            ),
+            'getMessagesWithHashtag': grpc.unary_stream_rpc_method_handler(
+                    servicer.getMessagesWithHashtag,
+                    request_deserializer=minitwitter__pb2.GetMessagesWithHashtagRequest.FromString,
                     response_serializer=minitwitter__pb2.Message.SerializeToString,
             ),
     }
@@ -127,6 +143,23 @@ class MiniTwitter(object):
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/MiniTwitter/sendBulkMessages',
             minitwitter__pb2.BulkMessageRequest.SerializeToString,
+            minitwitter__pb2.Message.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def getMessagesWithHashtag(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/MiniTwitter/getMessagesWithHashtag',
+            minitwitter__pb2.GetMessagesWithHashtagRequest.SerializeToString,
             minitwitter__pb2.Message.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -8,9 +8,9 @@ def run_with_hashtag():
     with grpc.insecure_channel('localhost:50051') as channel:
         stub = minitwitter_pb2_grpc.MiniTwitterStub(channel)
 
-        # Retrieve and print messages with the hashtag "#cats"
-        hashtag_messages = stub.getMessagesWithHashtag(minitwitter_pb2.GetMessagesWithHashtagRequest(hashtag="cats"))
-        print(f"Messages with hashtag #cats:")
+        # Retrieve and print messages with the hashtag 
+        hashtag_messages = stub.getMessagesWithHashtag(minitwitter_pb2.GetMessagesWithHashtagRequest(hashtag="LAL"))
+        print(f"Messages with hashtag #LAL:")
         for message in hashtag_messages:
             print(message.content)
 

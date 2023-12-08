@@ -12,8 +12,13 @@ message BulkMessageRequest {
   repeated Message messages = 1;
 }
 
+message GetMessagesWithHashtagRequest {
+  string hashtag = 1;
+}
+
 service MiniTwitter {
   rpc sendMessage(Message) returns (Message);
   rpc getMessages(GetMessagesRequest) returns (stream Message);
   rpc sendBulkMessages(BulkMessageRequest) returns (stream Message);
+  rpc getMessagesWithHashtag(GetMessagesWithHashtagRequest) returns (stream Message);
 }
